@@ -1,0 +1,72 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
+        <div class="header-fields">
+            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Nome da Armadura"/></h1>
+            <div class="resource">
+                <label class="resource-label">Absorção/Penalidade</label>
+                <span class="resource-value">{{system.absorcao}}/{{system.penalidade}}</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{localize "CDS.Descricao"}}</a>
+        <a class="item" data-tab="details">Detalhes</a>
+    </nav>
+
+    <section class="tab-content">
+        <!-- Aba Descrição -->
+        <div class="tab active" data-tab="description">
+            <div class="form-group">
+                <label>{{localize "CDS.Descricao"}}</label>
+                {{editor system.description target="system.description" button=true owner=owner editable=editable}}
+            </div>
+        </div>
+
+        <!-- Aba Detalhes -->
+        <div class="tab" data-tab="details">
+            <div class="form-group-grid">
+                <div class="form-group">
+                    <label>{{localize "CDS.Absorcao"}}</label>
+                    <input type="number" name="system.absorcao" value="{{system.absorcao}}" min="0" data-dtype="Number"/>
+                </div>
+
+                <div class="form-group">
+                    <label>{{localize "CDS.Penalidade"}}</label>
+                    <input type="number" name="system.penalidade" value="{{system.penalidade}}" min="0" data-dtype="Number"/>
+                </div>
+            </div>
+
+            <div class="form-group-grid">
+                <div class="form-group">
+                    <label>{{localize "CDS.Peso"}} (kg)</label>
+                    <input type="number" name="system.peso" value="{{system.peso}}" step="0.1" data-dtype="Number"/>
+                </div>
+
+                <div class="form-group">
+                    <label>{{localize "CDS.Preco"}} ($)</label>
+                    <input type="number" name="system.preco" value="{{system.preco}}" data-dtype="Number"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Armadura Equipada</label>
+                <input type="checkbox" name="system.equipada" {{checked system.equipada}} data-dtype="Boolean"/>
+            </div>
+
+            <div class="form-group">
+                <button type="button" class="test-item">
+                    <i class="fas fa-shield-alt"></i> Mostrar Informações
+                </button>
+            </div>
+
+            <div class="armor-info">
+                <h4>Informações da Armadura</h4>
+                <p><strong>Absorção:</strong> Reduz o dano recebido em {{system.absorcao}} pontos.</p>
+                <p><strong>Penalidade:</strong> Aplica -{{system.penalidade}} em rolagens de perícias físicas quando equipada.</p>
+            </div>
+        </div>
+    </section>
+</form>
+

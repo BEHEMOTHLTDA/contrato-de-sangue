@@ -1,0 +1,531 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+    <div class="sheet-container">
+        <!-- Coluna Esquerda: Atributos e Perícias -->
+        <div class="left-pane">
+            <!-- Nome do Personagem -->
+            <div class="char-name-container">
+                <input name="name" type="text" value="{{actor.name}}" placeholder="Nome do Personagem"/>
+            </div>
+
+            <!-- Balança Eterna Aprimorada -->
+            <div class="eternal-balance">
+                <div class="balance-scale">
+                    <div class="balance-indicator" style="left: {{multiply (divide system.humanidade.value 12) 190}}px;"></div>
+                </div>
+                <div class="balance-labels">
+                    <span class="humanidade">Humanidade: {{system.humanidade.value}}</span>
+                    <span class="bestialidade">Bestialidade: {{system.bestialidade.value}}</span>
+                </div>
+                <div class="balance-inputs">
+                    <input type="number" name="system.humanidade.value" value="{{system.humanidade.value}}" min="0" max="12" data-dtype="Number" style="width: 60px;"/>
+                    <input type="number" name="system.bestialidade.value" value="{{system.bestialidade.value}}" min="0" max="12" data-dtype="Number" style="width: 60px;"/>
+                </div>
+            </div>
+
+            <!-- Atributos Principais -->
+            <div class="attributes-section">
+                <div class="stat-box">
+                    <label>{{localize "CDS.Mortalidade"}}</label>
+                    <input name="system.mortalidade.value" type="number" value="{{system.mortalidade.value}}" min="0" data-dtype="Number"/>
+                    <div class="mortality-info">
+                        {{#if (gte system.mortalidade.value 13)}}
+                            <span class="critical-status">CONTROLE PERDIDO</span>
+                        {{else if (gte system.mortalidade.value 10)}}
+                            <span class="warning-status">Caça diária necessária (-3)</span>
+                        {{else if (gte system.mortalidade.value 7)}}
+                            <span class="warning-status">Caça 2x/semana (-2)</span>
+                        {{else if (gte system.mortalidade.value 4)}}
+                            <span class="info-status">Caça 1x/semana (-1)</span>
+                        {{else}}
+                            <span class="safe-status">Sem necessidade de caça</span>
+                        {{/if}}
+                    </div>
+                </div>
+
+                <!-- Reserva de Dados Visual -->
+                <div class="stat-box">
+                    <label>{{localize "CDS.ReservaDados"}}</label>
+                    <div class="dice-reserve">
+                        {{#each (range system.reservaDados.max) as |i|}}
+                            <div class="dice-icon {{#if (lt i ../system.reservaDados.value)}}available{{else}}used{{/if}}" 
+                                 data-dice-index="{{i}}" 
+                                 data-tooltip="{{#if (lt i ../system.reservaDados.value)}}Dado disponível - Clique para usar{{else}}Dado usado{{/if}}">
+                                🎲
+                            </div>
+                        {{/each}}
+                    </div>
+                    <div class="dice-controls">
+                        <button type="button" class="cds-button sacred" data-action="usar-dado-sagrado">
+                            <i class="fas fa-star"></i> Sagrado
+                        </button>
+                        <button type="button" class="cds-button umbral" data-action="usar-dado-umbral">
+                            <i class="fas fa-fire"></i> Umbral
+                        </button>
+                        <button type="button" class="cds-button" data-action="recuperar-reserva">
+                            <i class="fas fa-plus"></i> Recuperar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="stat-box">
+                    <label>{{localize "CDS.PontosEntendimento"}}</label>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: {{multiply (divide system.pontosEntendimento.value system.pontosEntendimento.max) 100}}%;"></div>
+                        <div class="progress-text">{{system.pontosEntendimento.value}} / {{system.pontosEntendimento.max}}</div>
+                    </div>
+                    <div class="understanding-controls">
+                        <button type="button" class="cds-button" data-action="gastar-entendimento">
+                            <i class="fas fa-minus"></i> Gastar
+                        </button>
+                        <button type="button" class="cds-button" data-action="adicionar-entendimento">
+                            <i class="fas fa-plus"></i> Adicionar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vida e Condições -->
+            <div class="health-section">
+                <div class="stat-box">
+                    <label>{{localize "CDS.Vida"}}</label>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: {{multiply (divide system.health.value system.health.max) 100}}%;"></div>
+                        <div class="progress-text">{{system.health.value}} / {{system.health.max}}</div>
+                    </div>
+                </div>
+
+                <div class="conditions-grid">
+                    <label class="condition-label">
+                        <input type="checkbox" name="system.health.conditions.escoriado" {{checked system.health.conditions.escoriado}} data-dtype="Boolean"/>
+                        Escoriado (-1)
+                    </label>
+                    <label class="condition-label">
+                        <input type="checkbox" name="system.health.conditions.machucado" {{checked system.health.conditions.machucado}} data-dtype="Boolean"/>
+                        Machucado (-2)
+                    </label>
+                    <label class="condition-label">
+                        <input type="checkbox" name="system.health.conditions.ferido" {{checked system.health.conditions.ferido}} data-dtype="Boolean"/>
+                        Ferido (-3)
+                    </label>
+                    <label class="condition-label">
+                        <input type="checkbox" name="system.health.conditions.feridoGravemente" {{checked system.health.conditions.feridoGravemente}} data-dtype="Boolean"/>
+                        Ferido Gravemente (-4)
+                    </label>
+                    <label class="condition-label">
+                        <input type="checkbox" name="system.health.conditions.aleijado" {{checked system.health.conditions.aleijado}} data-dtype="Boolean"/>
+                        Aleijado (-5)
+                    </label>
+                    <label class="condition-label">
+                        <input type="checkbox" name="system.health.conditions.incapacitado" {{checked system.health.conditions.incapacitado}} data-dtype="Boolean"/>
+                        Incapacitado (-10)
+                    </label>
+                </div>
+            </div>
+
+            <!-- Perícias -->
+            <div class="skills-section">
+                <h3>{{localize "CDS.Pericias"}}</h3>
+                
+                <div class="skill-category">
+                    <h4>Físicas</h4>
+                    {{#each system.pericias as |value key|}}
+                        {{#if (or (eq key "atletismo") (eq key "briga") (eq key "conducao") (eq key "furtividade") (eq key "sobrevivencia"))}}
+                            <div class="skill-row interactive-element">
+                                <span class="skill-name rollable" data-roll="1d12 + @pericias.{{key}}" data-label="{{localize (concat 'CDS.pericias.' key)}}" data-skill="{{key}}">
+                                    {{localize (concat "CDS.pericias." key)}}
+                                </span>
+                                <input type="number" name="system.pericias.{{key}}" value="{{value}}" min="0" data-dtype="Number"/>
+                            </div>
+                        {{/if}}
+                    {{/each}}
+                </div>
+
+                <div class="skill-category">
+                    <h4>Mentais</h4>
+                    {{#each system.pericias as |value key|}}
+                        {{#if (or (eq key "computadores") (eq key "investigacao") (eq key "medicina") (eq key "ocultismo") (eq key "ciencias"))}}
+                            <div class="skill-row interactive-element">
+                                <span class="skill-name rollable" data-roll="1d12 + @pericias.{{key}}" data-label="{{localize (concat 'CDS.pericias.' key)}}" data-skill="{{key}}">
+                                    {{localize (concat "CDS.pericias." key)}}
+                                </span>
+                                <input type="number" name="system.pericias.{{key}}" value="{{value}}" min="0" data-dtype="Number"/>
+                            </div>
+                        {{/if}}
+                    {{/each}}
+                </div>
+
+                <div class="skill-category">
+                    <h4>Sociais</h4>
+                    {{#each system.pericias as |value key|}}
+                        {{#if (or (eq key "empatia") (eq key "expressao") (eq key "intimidacao") (eq key "persuasao") (eq key "subterfugio"))}}
+                            <div class="skill-row interactive-element">
+                                <span class="skill-name rollable" data-roll="1d12 + @pericias.{{key}}" data-label="{{localize (concat 'CDS.pericias.' key)}}" data-skill="{{key}}">
+                                    {{localize (concat "CDS.pericias." key)}}
+                                </span>
+                                <input type="number" name="system.pericias.{{key}}" value="{{value}}" min="0" data-dtype="Number"/>
+                            </div>
+                        {{/if}}
+                    {{/each}}
+                </div>
+
+                <div class="skill-category">
+                    <h4>Combate</h4>
+                    {{#each system.pericias as |value key|}}
+                        {{#if (or (eq key "armasBrancas") (eq key "armasDeFogo") (eq key "defesa"))}}
+                            <div class="skill-row interactive-element">
+                                <span class="skill-name rollable" data-roll="1d12 + @pericias.{{key}}" data-label="{{localize (concat 'CDS.pericias.' key)}}" data-skill="{{key}}">
+                                    {{localize (concat "CDS.pericias." key)}}
+                                </span>
+                                <input type="number" name="system.pericias.{{key}}" value="{{value}}" min="0" data-dtype="Number"/>
+                            </div>
+                        {{/if}}
+                    {{/each}}
+                </div>
+            </div>
+
+            <!-- Ações de Combate -->
+            <div class="combat-actions">
+                <h3>Ações de Combate</h3>
+                <div class="action-buttons">
+                    <button type="button" class="cds-button" data-action="rolar-iniciativa">
+                        <i class="fas fa-bolt"></i> Iniciativa
+                    </button>
+                    <button type="button" class="cds-button" data-action="rolar-ataque">
+                        <i class="fas fa-sword"></i> Ataque
+                    </button>
+                    <button type="button" class="cds-button" data-action="rolar-defesa">
+                        <i class="fas fa-shield"></i> Defesa
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coluna Central: Avatar e Informações -->
+        <div class="center-pane">
+            <!-- Avatar do Personagem -->
+            <div class="avatar-container">
+                <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="200" width="200"/>
+                <div class="avatar-overlay">
+                    <div class="linhagem-badge">{{localize (concat "CDS." (capitalize system.linhagem))}}</div>
+                </div>
+            </div>
+
+            <!-- Abas de Navegação -->
+            <nav class="tabs" data-group="primary">
+                <a class="item active" data-tab="info">{{localize "CDS.Info"}}</a>
+                <a class="item" data-tab="vantagens">{{localize "CDS.Vantagens"}}</a>
+                <a class="item" data-tab="biografia">{{localize "CDS.Biografia"}}</a>
+                <a class="item" data-tab="equipamento">{{localize "CDS.Equipamento"}}</a>
+            </nav>
+
+            <!-- Conteúdo das Abas -->
+            <section class="tab-content">
+                <!-- Aba Info -->
+                <div class="tab active animate-on-scroll" data-tab="info">
+                    <div class="info-grid">
+                        <div class="form-group">
+                            <label>{{localize "CDS.Conceito"}}</label>
+                            <input type="text" name="system.conceito" value="{{system.conceito}}" placeholder="Ex: Vampiro Investigador" data-dtype="String"/>
+                        </div>
+                        <div class="form-group">
+                            <label>{{localize "CDS.Linhagem"}}</label>
+                            <select name="system.linhagem" data-dtype="String">
+                                <option value="upior" {{#if (eq system.linhagem "upior")}}selected{{/if}}>{{localize "CDS.Upior"}}</option>
+                                <option value="wilkolaki" {{#if (eq system.linhagem "wilkolaki")}}selected{{/if}}>{{localize "CDS.Wilkolaki"}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>{{localize "CDS.Afinidade"}}</label>
+                            <select name="system.afinidade" data-dtype="String">
+                                <option value="brutalista" {{#if (eq system.afinidade "brutalista")}}selected{{/if}}>Brutalista</option>
+                                <option value="investigativa" {{#if (eq system.afinidade "investigativa")}}selected{{/if}}>Investigativa</option>
+                                <option value="social" {{#if (eq system.afinidade "social")}}selected{{/if}}>Social</option>
+                                <option value="ocultista" {{#if (eq system.afinidade "ocultista")}}selected{{/if}}>Ocultista</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>{{localize "CDS.Idade"}}</label>
+                            <input type="text" name="system.idade" value="{{system.idade}}" placeholder="Ex: 150 anos" data-dtype="String"/>
+                        </div>
+                        <div class="form-group">
+                            <label>{{localize "CDS.Aparencia"}}</label>
+                            <textarea name="system.aparencia" data-dtype="String">{{system.aparencia}}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>{{localize "CDS.Contatos"}}</label>
+                            <textarea name="system.contatos" data-dtype="String">{{system.contatos}}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aba Vantagens -->
+                <div class="tab animate-on-scroll" data-tab="vantagens">
+                    <div class="item-section">
+                        <div class="section-header">
+                            <h3>{{localize "CDS.Vantagens"}}</h3>
+                            <button type="button" class="item-create-button cds-button" data-type="vantagem">
+                                <i class="fas fa-plus"></i> Adicionar
+                            </button>
+                        </div>
+                        <div class="item-list">
+                            {{#each vantagens as |item id|}}
+                                <div class="item-entry interactive-element" data-item-id="{{item._id}}" draggable="true">
+                                    <div class="item-icon">
+                                        {{#if (eq item.system.linhagem "upior")}}🧛{{else if (eq item.system.linhagem "wilkolaki")}}🐺{{else}}⚡{{/if}}
+                                    </div>
+                                    <div class="item-details">
+                                        <div class="item-name">{{item.name}}</div>
+                                        <div class="item-description">{{truncate item.system.description 50}}</div>
+                                    </div>
+                                    <div class="item-controls">
+                                        <button type="button" class="item-control item-edit" data-tooltip="Editar">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="item-control item-roll" data-tooltip="Usar">
+                                            <i class="fas fa-dice-d20"></i>
+                                        </button>
+                                        <button type="button" class="item-control item-delete" data-tooltip="Excluir">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            {{/each}}
+                        </div>
+                    </div>
+
+                    <div class="item-section">
+                        <div class="section-header">
+                            <h3>{{localize "CDS.Poderes"}}</h3>
+                            <button type="button" class="item-create-button cds-button" data-type="poder">
+                                <i class="fas fa-plus"></i> Adicionar
+                            </button>
+                        </div>
+                        <div class="item-list">
+                            {{#each poderes as |item id|}}
+                                <div class="item-entry interactive-element" data-item-id="{{item._id}}" draggable="true">
+                                    <div class="item-icon">
+                                        {{#if (eq item.system.linhagem "upior")}}🔮{{else}}🌙{{/if}}
+                                    </div>
+                                    <div class="item-details">
+                                        <div class="item-name">{{item.name}}</div>
+                                        <div class="item-description">{{item.system.efeito}}</div>
+                                    </div>
+                                    <div class="item-controls">
+                                        <button type="button" class="item-control item-edit" data-tooltip="Editar">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="item-control item-roll" data-tooltip="Usar">
+                                            <i class="fas fa-magic"></i>
+                                        </button>
+                                        <button type="button" class="item-control item-delete" data-tooltip="Excluir">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aba Biografia -->
+                <div class="tab animate-on-scroll" data-tab="biografia">
+                    <div class="form-group">
+                        <label>{{localize "CDS.Biografia"}}</label>
+                        {{editor system.biografia target="system.biografia" button=true owner=owner editable=editable}}
+                    </div>
+                </div>
+
+                <!-- Aba Equipamento -->
+                <div class="tab animate-on-scroll" data-tab="equipamento">
+                    <div class="item-section">
+                        <div class="section-header">
+                            <h3>{{localize "CDS.Armas"}}</h3>
+                            <button type="button" class="item-create-button cds-button" data-type="arma">
+                                <i class="fas fa-plus"></i> Adicionar
+                            </button>
+                        </div>
+                        <div class="item-list">
+                            {{#each armas as |item id|}}
+                                <div class="item-entry interactive-element" data-item-id="{{item._id}}" draggable="true">
+                                    <div class="item-icon">
+                                        {{#if (eq item.system.tipo "branca")}}⚔️{{else}}🔫{{/if}}
+                                    </div>
+                                    <div class="item-details">
+                                        <div class="item-name">{{item.name}}</div>
+                                        <div class="item-description">Dano: +{{item.system.dano}} | {{localize (concat "CDS.Alcance" (capitalize item.system.alcance))}}</div>
+                                    </div>
+                                    <div class="item-controls">
+                                        <button type="button" class="item-control item-edit" data-tooltip="Editar">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="item-control item-roll" data-tooltip="Atacar">
+                                            <i class="fas fa-sword"></i>
+                                        </button>
+                                        <button type="button" class="item-control item-delete" data-tooltip="Excluir">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            {{/each}}
+                        </div>
+                    </div>
+
+                    <div class="item-section">
+                        <div class="section-header">
+                            <h3>{{localize "CDS.Armaduras"}}</h3>
+                            <button type="button" class="item-create-button cds-button" data-type="armadura">
+                                <i class="fas fa-plus"></i> Adicionar
+                            </button>
+                        </div>
+                        <div class="item-list">
+                            {{#each armaduras as |item id|}}
+                                <div class="item-entry interactive-element" data-item-id="{{item._id}}" draggable="true">
+                                    <div class="item-icon">🛡️</div>
+                                    <div class="item-details">
+                                        <div class="item-name">{{item.name}}</div>
+                                        <div class="item-description">Absorção: {{item.system.absorcao}} | Penalidade: -{{item.system.penalidade}}</div>
+                                    </div>
+                                    <div class="item-controls">
+                                        <button type="button" class="item-control item-edit" data-tooltip="Editar">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="item-control item-roll" data-tooltip="Info">
+                                            <i class="fas fa-info"></i>
+                                        </button>
+                                        <button type="button" class="item-control item-delete" data-tooltip="Excluir">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            {{/each}}
+                        </div>
+                    </div>
+
+                    <div class="item-section">
+                        <div class="section-header">
+                            <h3>{{localize "CDS.Equipamentos"}}</h3>
+                            <button type="button" class="item-create-button cds-button" data-type="equipamento">
+                                <i class="fas fa-plus"></i> Adicionar
+                            </button>
+                        </div>
+                        <div class="item-list">
+                            {{#each equipamentos as |item id|}}
+                                <div class="item-entry interactive-element" data-item-id="{{item._id}}" draggable="true">
+                                    <div class="item-icon">📦</div>
+                                    <div class="item-details">
+                                        <div class="item-name">{{item.name}}</div>
+                                        <div class="item-description">Qtd: {{item.system.quantidade}} | Peso: {{item.system.peso}}kg</div>
+                                    </div>
+                                    <div class="item-controls">
+                                        <button type="button" class="item-control item-edit" data-tooltip="Editar">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="item-control item-roll" data-tooltip="Info">
+                                            <i class="fas fa-info"></i>
+                                        </button>
+                                        <button type="button" class="item-control item-delete" data-tooltip="Excluir">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Coluna Direita: Informações Adicionais -->
+        <div class="right-pane">
+            <!-- Status do Personagem -->
+            <div class="status-panel">
+                <h3>Status</h3>
+                <div class="status-indicators">
+                    <div class="status-item">
+                        <span class="status-indicator {{#if (gte system.health.value (multiply system.health.max 0.75))}}healthy{{else if (gte system.health.value (multiply system.health.max 0.25))}}wounded{{else}}critical{{/if}}"></span>
+                        <span>Condição Física</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-indicator {{#if (lt system.mortalidade.value 4)}}healthy{{else if (lt system.mortalidade.value 10)}}wounded{{else}}critical{{/if}}"></span>
+                        <span>Controle Mental</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-indicator {{#if (gt system.reservaDados.value 0)}}healthy{{else}}critical{{/if}}"></span>
+                        <span>Reserva de Poder</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Informações de Caça -->
+            <div class="hunt-panel">
+                <h3>Necessidades</h3>
+                <div class="hunt-info">
+                    {{#if cacaInfo.necessaria}}
+                        <div class="hunt-requirement">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>Caça necessária: {{cacaInfo.frequencia}}</span>
+                        </div>
+                        <button type="button" class="cds-button perform-hunt">
+                            <i class="fas fa-crosshairs"></i> Realizar Caça
+                        </button>
+                    {{else}}
+                        <div class="hunt-satisfied">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Sem necessidade de caça</span>
+                        </div>
+                    {{/if}}
+                </div>
+            </div>
+
+            <!-- Penalidades Ativas -->
+            <div class="penalties-panel">
+                <h3>Penalidades</h3>
+                <div class="penalty-list">
+                    {{#if penalidades.mortalidade}}
+                        <div class="penalty-item">
+                            <span class="penalty-source">Mortalidade:</span>
+                            <span class="penalty-value">{{penalidades.mortalidade}}</span>
+                        </div>
+                    {{/if}}
+                    {{#if penalidades.ferimentos}}
+                        <div class="penalty-item">
+                            <span class="penalty-source">Ferimentos:</span>
+                            <span class="penalty-value">{{penalidades.ferimentos}}</span>
+                        </div>
+                    {{/if}}
+                    {{#if penalidades.total}}
+                        <div class="penalty-total">
+                            <span class="penalty-source">Total:</span>
+                            <span class="penalty-value">{{penalidades.total}}</span>
+                        </div>
+                    {{else}}
+                        <div class="no-penalties">
+                            <i class="fas fa-smile"></i>
+                            <span>Sem penalidades</span>
+                        </div>
+                    {{/if}}
+                </div>
+            </div>
+
+            <!-- Experiência -->
+            <div class="experience-panel">
+                <h3>{{localize "CDS.Experiencia"}}</h3>
+                <div class="exp-grid">
+                    <div class="exp-item">
+                        <label>Total:</label>
+                        <input type="number" name="system.experiencia.total" value="{{system.experiencia.total}}" min="0" data-dtype="Number"/>
+                    </div>
+                    <div class="exp-item">
+                        <label>Gasta:</label>
+                        <input type="number" name="system.experiencia.gasta" value="{{system.experiencia.gasta}}" min="0" data-dtype="Number"/>
+                    </div>
+                    <div class="exp-item">
+                        <label>Disponível:</label>
+                        <span class="exp-available">{{subtract system.experiencia.total system.experiencia.gasta}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+

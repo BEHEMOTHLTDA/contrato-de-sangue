@@ -1,0 +1,392 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <div class="sheet-container">
+        <!-- Coluna Esquerda: Atributos e Perícias -->
+        <div class="left-pane">
+            <!-- Nome do Personagem -->
+            <div class="char-name-container">
+                <input name="name" type="text" value="{{actor.name}}" placeholder="Nome do Personagem"/>
+            </div>
+
+            <!-- Atributos Principais -->
+          <!-- Balança Eterna Aprimorada -->
+        <div class="eternal-balance">
+          <div class="balance-scale">
+            <div class="balance-indicator" style="left: {{multiply (divide system.humanidade.value 12) 190}}px;"></div>
+          </div>
+          <div class="balance-labels">
+            <span class="humanidade">Humanidade: {{system.humanidade.value}}</span>
+            <span class="bestialidade">Bestialidade: {{system.bestialidade.value}}</span>
+          </div>
+        </di                <!-- Reserva de Dados Visual -->
+                <div class="stat-box">
+                    <label>{{localize "CDS.ReservaDados"}}</label>
+                    <div class="dice-reserve">
+                        {{#each (range system.reservaDados.max) as |i|}}
+                            <div class="dice-icon {{#if (lt i ../system.reservaDados.value)}}available{{else}}used{{/if}}" 
+                                 data-dice-index="{{i}}" 
+                                 data-tooltip="{{#if (lt i ../system.reservaDados.value)}}Dado disponível - Clique para usar{{else}}Dado usado{{/if}}">
+                                🎲
+                            </div>
+                        {{/each}}
+                    </div>
+                    <div class="dice-controls">
+                        <button type="button" class="cds-button sacred" data-action="usar-dado-sagrado">
+                            <i class="fas fa-star"></i> Sagrado
+                        </button>
+                        <button type="button" class="cds-button umbral" data-action="usar-dado-umbral">
+                            <i class="fas fa-fire"></i> Umbral
+                        </button>
+                    </div>
+                </div>                  <input name="system.pontosEntendimento.value" type="number" value="{{system.pontosEntendimento.value}}" min="0" data-dtype="Number"/>
+                </div>
+            </div>
+
+            <!-- Reserva de Dados -->
+            <div class="reserva-dados">
+                <h4>{{localize "CDS.ReservaDados"}}</h4>
+                <div class="stat-display">
+                    <span>{{system.reservaDados.value}} / {{system.reservaDados.max}}</span>
+                </div>
+                <div class="dados-buttons">
+                    <button type="button" class="dado-sagrado" data-action="usar-dado-sagrado">
+                        {{localize "CDS.DadoSagrado"}}
+                    </button>
+                    <button type="button" class="dado-umbral" data-action="usar-dado-umbral">
+                        {{localize "CDS.DadoUmbral"}}
+                    </button>
+                </div>
+            </div>
+
+            <!-- Perícias -->
+            <div class="pericias-container">
+                <h3>{{localize "CDS.Pericias"}}</h3>
+                
+                <!-- Perícias Físicas -->
+                <div class="pericias-categoria">
+                    <h4>{{localize "CDS.PericiasF\u00edsicas"}}</h4>
+                    <div class="pericias-grid">
+                        <div class="pericia-item rollable" data-roll="1d12 + @pericias.atletismo" data-label="{{localize 'CDS.pericias.atletismo'}}">
+                            <label>{{localize "CDS.pericias.atletismo"}}</label>
+                            <input name="system.pericias.atletismo" type="number" value="{{system.pericias.atletismo}}" min="0" data-dtype="Number"/>
+                        </div>
+                        <div class="pericia-item rollable" data-roll="1d12 + @pericias.briga" data-label="{{localize 'CDS.pericias.briga'}}">
+                            <label>{{localize "CDS.pericias.briga"}}</label>
+                            <input name="system.pericias.briga" type="number" value="{{system.pericias.briga}}" min="0" data-dtype="Number"/>
+                        </div>
+                        <div class="pericia-item rollable" data-roll="1d12 + @pericias.conducao" data-label="{{localize 'CDS.pericias.conducao'}}">
+                            <label>{{localize "CDS.pericias.conducao"}}</label>
+                            <input name="system.pericias.conducao" type="number" value="{{system.pericias.conducao}}" min="0" data-dtype="Number"/>
+                        </div>
+                        <div class="pericia-item rollable" data-roll="1d12 + @pericias.furtividade" data-label="{{localize 'CDS.pericias.furtividade'}}">
+                            <label>{{localize "CDS.pericias.furtividade"}}</label>
+                            <input name="system.pericias.furtividade" type="number" value="{{system.pericias.furtividade}}" min="0" data-dtype="Number"/>
+                        </div>
+                        <div class="pericia-item rollable" data-roll="1d12 + @pericias.sobrevivencia" data-label="{{localize 'CDS.pericias.sobrevivencia'}}">
+                            <label>{{localize "CDS.pericias.sobrevivencia"}}</label>
+                            <input name="system.pericias.sobrevivencia" type="number" value="{{system.pericias.sobrevivencia}}" min="0" data-dtype="Number"/>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Perícias Mentais -->
+                <div class="pericias-categoria">
+                    <h4>{{localize "CDS.PericiasM\u00e9ntais"}}</h4>
+                    <div class="pericias-grid">
+                        <div class="pericia-item rollable" data-roll="1d12 + @pericias.computadores" data-label="{{localize 'CDS.pericias.computadores'}}">
+                            <label>{{localize "CDS.pericias.computadores"}}</label>
+                            <input name="system.pericias.computadores" type="number" value="{{system.pericias.computadores}}" min="0" data-dtype="Number"/>
+                        </div>
+                        <div class="pericia-item rollable" data-roll="1d12 + @pericias.investigacao" data-label="{{localize 'CDS.pericias.investigacao'}}">
+                            <label>{{localize "CDS.pericias.investigacao"}}</label>
+                            <input name="system.pericias.investigacao" type="number" value="{{system.pericias.investigacao}}" min="0" data-dtype="Number"/>
+                        </div>
+                        <div class="pericia-item rollable" data-roll="1d12 + @pericias.medicina" data-label="{{localize 'CDS.pericias.medicina'}}">
+                            <label>{{localize "CDS.pericias.medicina"}}</label>
+                            <input name="system.pericias.medicina" type="number" value="{{system.pericias.medicina}}" min="0" data-dtype="Number"/>
+                        </div>
+                        <div class="pericia-item rollable" data-roll="1d12 + @pericias.ocultismo" data-label="{{localize 'CDS.pericias.ocultismo'}}">
+                            <label>{{localize "CDS.pericias.ocultismo"}}</label>
+                            <input name="system.pericias.ocultismo" type="number" value="{{system.pericias.ocultismo}}" min="0" data-dtype="Number"/>
+                        </div>
+                        <div class="pericia-item rollable" data-roll="1d12 + @pericias.ciencias" data-label="{{localize 'CDS.pericias.ciencias'}}">
+                            <label>{{localize "CDS.pericias.ciencias"}}</label>
+                            <input name="system.pericias.ciencias" type="number" value="{{system.pericias.ciencias}}" min="0" data-dtype="Number"/>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Perícias Sociais -->
+                <div class="pericias-categoria">
+                    <h4>{{localize "CDS.PericiasS\u00f3ciais"}}</h4>
+                    <div class="pericias-grid">
+                        <div class="pericia-item rollable" data-roll="1d12 + @pericias.empatia" data-label="{{localize 'CDS.pericias.empatia'}}">
+                            <label>{{localize "CDS.pericias.empatia"}}</label>
+                            <input name="system.pericias.empatia" type="number" value="{{system.pericias.empatia}}" min="0" data-dtype="Number"/>
+                        </div>
+                        <div class="pericia-item rollable" data-roll="1d12 + @pericias.expressao" data-label="{{localize 'CDS.pericias.expressao'}}">
+                            <label>{{localize "CDS.pericias.expressao"}}</label>
+                            <input name="system.pericias.expressao" type="number" value="{{system.pericias.expressao}}" min="0" data-dtype="Number"/>
+                        </div>
+                        <div class="pericia-item rollable" data-roll="1d12 + @pericias.intimidacao" data-label="{{localize 'CDS.pericias.intimidacao'}}">
+                            <label>{{localize "CDS.pericias.intimidacao"}}</label>
+                            <input name="system.pericias.intimidacao" type="number" value="{{system.pericias.intimidacao}}" min="0" data-dtype="Number"/>
+                        </div>
+                        <div class="pericia-item rollable" data-roll="1d12 + @pericias.persuasao" data-label="{{localize 'CDS.pericias.persuasao'}}">
+                            <label>{{localize "CDS.pericias.persuasao"}}</label>
+                            <input name="system.pericias.persuasao" type="number" value="{{system.pericias.persuasao}}" min="0" data-dtype="Number"/>
+                        </div>
+                        <div class="pericia-item rollable" data-roll="1d12 + @pericias.subterfugio" data-label="{{localize 'CDS.pericias.subterfugio'}}">
+                            <label>{{localize "CDS.pericias.subterfugio"}}</label>
+                            <input name="system.pericias.subterfugio" type="number" value="{{system.pericias.subterfugio}}" min="0" data-dtype="Number"/>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Perícias de Combate -->
+                <div class="pericias-categoria">
+                    <h4>{{localize "CDS.PericiasC\u00f3mbate"}}</h4>
+                    <div class="pericias-grid">
+                        <div class="pericia-item rollable" data-roll="1d12 + @pericias.armasBrancas" data-label="{{localize 'CDS.pericias.armasBrancas'}}">
+                            <label>{{localize "CDS.pericias.armasBrancas"}}</label>
+                            <input name="system.pericias.armasBrancas" type="number" value="{{system.pericias.armasBrancas}}" min="0" data-dtype="Number"/>
+                        </div>
+                        <div class="pericia-item rollable" data-roll="1d12 + @pericias.armasDeFogo" data-label="{{localize 'CDS.pericias.armasDeFogo'}}">
+                            <label>{{localize "CDS.pericias.armasDeFogo"}}</label>
+                            <input name="system.pericias.armasDeFogo" type="number" value="{{system.pericias.armasDeFogo}}" min="0" data-dtype="Number"/>
+                        </div>
+                        <div class="pericia-item rollable" data-roll="1d12 + @pericias.defesa" data-label="{{localize 'CDS.pericias.defesa'}}">
+                            <label>{{localize "CDS.pericias.defesa"}}</label>
+                            <input name="system.pericias.defesa" type="number" value="{{system.pericias.defesa}}" min="0" data-dtype="Number"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coluna Central: Arte e Abas -->
+        <div class="center-pane">
+            <!-- Arte do Personagem -->
+            <div class="char-art">
+                <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" alt="{{actor.name}}"/>
+            </div>
+
+            <!-- Sistema de Abas -->
+            <div class="tabs">
+                <a class="item active" data-tab="info">{{localize "CDS.Info"}}</a>
+                <a class="item" data-tab="biografia">{{localize "CDS.Biografia"}}</a>
+                <a class="item" data-tab="combate">{{localize "CDS.Combate"}}</a>
+            </div>
+
+            <!-- Conteúdo das Abas -->
+            <div class="tab-content">
+                <!-- Aba Info -->
+                <div class="tab active" data-tab="info">
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>{{localize "CDS.Linhagem"}}</label>
+                            <select name="system.linhagem" data-dtype="String">
+                                <option value="upior" {{#if (eq system.linhagem "upior")}}selected{{/if}}>{{localize "CDS.Upior"}}</option>
+                                <option value="wilkolaki" {{#if (eq system.linhagem "wilkolaki")}}selected{{/if}}>{{localize "CDS.Wilkolaki"}}</option>
+                            </select>
+                        </div>
+                        <div class="info-item">
+                            <label>{{localize "CDS.Afinidade"}}</label>
+                            <select name="system.afinidade" data-dtype="String">
+                                <option value="brutalista" {{#if (eq system.afinidade "brutalista")}}selected{{/if}}>{{localize "CDS.Brutalista"}}</option>
+                                <option value="eremita" {{#if (eq system.afinidade "eremita")}}selected{{/if}}>{{localize "CDS.Eremita"}}</option>
+                            </select>
+                        </div>
+                        <div class="info-item">
+                            <label>{{localize "CDS.Conceito"}}</label>
+                            <input name="system.conceito" type="text" value="{{system.conceito}}" data-dtype="String"/>
+                        </div>
+                        <div class="info-item">
+                            <label>{{localize "CDS.Idade"}}</label>
+                            <input name="system.idade" type="text" value="{{system.idade}}" data-dtype="String"/>
+                        </div>
+                        <div class="info-item">
+                            <label>{{localize "CDS.Aparencia"}}</label>
+                            <textarea name="system.aparencia" data-dtype="String">{{system.aparencia}}</textarea>
+                        </div>
+                        <div class="info-item">
+                            <label>{{localize "CDS.Contatos"}}</label>
+                            <textarea name="system.contatos" data-dtype="String">{{system.contatos}}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aba Biografia -->
+                <div class="tab" data-tab="biografia">
+                    {{editor system.biografia target="system.biografia" button=true owner=owner editable=editable}}
+                </div>
+
+                <!-- Aba Combate -->
+                <div class="tab" data-tab="combate">
+                    <div class="combat-actions">
+                        <button type="button" class="combat-button" data-action="rolar-iniciativa">
+                            {{localize "CDS.RolarIniciativa"}}
+                        </button>
+                        <button type="button" class="combat-button" data-action="rolar-ataque">
+                            {{localize "CDS.RolarAtaque"}}
+                        </button>
+                        <button type="button" class="combat-button" data-action="rolar-defesa">
+                            {{localize "CDS.RolarDefesa"}}
+                        </button>
+                    </div>
+                    
+                    <!-- Condições de Ferimento -->
+                    <div class="ferimentos">
+                        <h4>{{localize "CDS.Ferimentos"}}</h4>
+                        <div class="ferimentos-grid">
+                            <label class="ferimento-item">
+                                <input type="checkbox" name="system.health.conditions.escoriado" {{checked system.health.conditions.escoriado}}/>
+                                {{localize "CDS.Escoriado"}} (-1)
+                            </label>
+                            <label class="ferimento-item">
+                                <input type="checkbox" name="system.health.conditions.machucado" {{checked system.health.conditions.machucado}}/>
+                                {{localize "CDS.Machucado"}} (-2)
+                            </label>
+                            <label class="ferimento-item">
+                                <input type="checkbox" name="system.health.conditions.ferido" {{checked system.health.conditions.ferido}}/>
+                                {{localize "CDS.Ferido"}} (-3)
+                            </label>
+                            <label class="ferimento-item">
+                                <input type="checkbox" name="system.health.conditions.feridoGravemente" {{checked system.health.conditions.feridoGravemente}}/>
+                                {{localize "CDS.FeridoGravemente"}} (-4)
+                            </label>
+                            <label class="ferimento-item">
+                                <input type="checkbox" name="system.health.conditions.aleijado" {{checked system.health.conditions.aleijado}}/>
+                                {{localize "CDS.Aleijado"}} (-5)
+                            </label>
+                            <label class="ferimento-item">
+                                <input type="checkbox" name="system.health.conditions.incapacitado" {{checked system.health.conditions.incapacitado}}/>
+                                {{localize "CDS.Incapacitado"}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coluna Direita: Itens e Vantagens -->
+        <div class="right-pane">
+            <!-- Vantagens -->
+            <div class="vantagens-section">
+                <h3>{{localize "CDS.Vantagens"}}</h3>
+                <div class="item-list" data-item-type="vantagem">
+                    {{#each items as |item id|}}
+                        {{#if (eq item.type "vantagem")}}
+                        <div class="item" data-item-id="{{item._id}}">
+                            <div class="item-name">{{item.name}}</div>
+                            <div class="item-controls">
+                                <a class="item-control item-edit" title="{{localize 'CDS.EditItem'}}"><i class="fas fa-edit"></i></a>
+                                <a class="item-control item-delete" title="{{localize 'CDS.DeleteItem'}}"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </div>
+                        {{/if}}
+                    {{/each}}
+                </div>
+                <div class="item-create" data-type="vantagem">
+                    <button type="button" class="item-create-button">
+                        <i class="fas fa-plus"></i> {{localize "CDS.CreateVantagem"}}
+                    </button>
+                </div>
+            </div>
+
+            <!-- Armas -->
+            <div class="armas-section">
+                <h3>{{localize "CDS.Armas"}}</h3>
+                <div class="item-list" data-item-type="arma">
+                    {{#each items as |item id|}}
+                        {{#if (eq item.type "arma")}}
+                        <div class="item" data-item-id="{{item._id}}">
+                            <div class="item-name">{{item.name}} (+{{item.system.dano}})</div>
+                            <div class="item-controls">
+                                <a class="item-control item-roll" title="{{localize 'CDS.RollWeapon'}}"><i class="fas fa-dice-d20"></i></a>
+                                <a class="item-control item-edit" title="{{localize 'CDS.EditItem'}}"><i class="fas fa-edit"></i></a>
+                                <a class="item-control item-delete" title="{{localize 'CDS.DeleteItem'}}"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </div>
+                        {{/if}}
+                    {{/each}}
+                </div>
+                <div class="item-create" data-type="arma">
+                    <button type="button" class="item-create-button">
+                        <i class="fas fa-plus"></i> {{localize "CDS.CreateArma"}}
+                    </button>
+                </div>
+            </div>
+
+            <!-- Armaduras -->
+            <div class="armaduras-section">
+                <h3>{{localize "CDS.Armaduras"}}</h3>
+                <div class="item-list" data-item-type="armadura">
+                    {{#each items as |item id|}}
+                        {{#if (eq item.type "armadura")}}
+                        <div class="item" data-item-id="{{item._id}}">
+                            <div class="item-name">{{item.name}} ({{item.system.absorcao}}/{{item.system.penalidade}})</div>
+                            <div class="item-controls">
+                                <a class="item-control item-edit" title="{{localize 'CDS.EditItem'}}"><i class="fas fa-edit"></i></a>
+                                <a class="item-control item-delete" title="{{localize 'CDS.DeleteItem'}}"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </div>
+                        {{/if}}
+                    {{/each}}
+                </div>
+                <div class="item-create" data-type="armadura">
+                    <button type="button" class="item-create-button">
+                        <i class="fas fa-plus"></i> {{localize "CDS.CreateArmadura"}}
+                    </button>
+                </div>
+            </div>
+
+            <!-- Equipamentos -->
+            <div class="equipamentos-section">
+                <h3>{{localize "CDS.Equipamentos"}}</h3>
+                <div class="item-list" data-item-type="equipamento">
+                    {{#each items as |item id|}}
+                        {{#if (eq item.type "equipamento")}}
+                        <div class="item" data-item-id="{{item._id}}">
+                            <div class="item-name">{{item.name}}</div>
+                            <div class="item-controls">
+                                <a class="item-control item-edit" title="{{localize 'CDS.EditItem'}}"><i class="fas fa-edit"></i></a>
+                                <a class="item-control item-delete" title="{{localize 'CDS.DeleteItem'}}"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </div>
+                        {{/if}}
+                    {{/each}}
+                </div>
+                <div class="item-create" data-type="equipamento">
+                    <button type="button" class="item-create-button">
+                        <i class="fas fa-plus"></i> {{localize "CDS.CreateEquipamento"}}
+                    </button>
+                </div>
+            </div>
+
+            <!-- Poderes -->
+            <div class="poderes-section">
+                <h3>{{localize "CDS.Poderes"}}</h3>
+                <div class="item-list" data-item-type="poder">
+                    {{#each items as |item id|}}
+                        {{#if (eq item.type "poder")}}
+                        <div class="item" data-item-id="{{item._id}}">
+                            <div class="item-name">{{item.name}}</div>
+                            <div class="item-controls">
+                                <a class="item-control item-roll" title="{{localize 'CDS.UsePower'}}"><i class="fas fa-magic"></i></a>
+                                <a class="item-control item-edit" title="{{localize 'CDS.EditItem'}}"><i class="fas fa-edit"></i></a>
+                                <a class="item-control item-delete" title="{{localize 'CDS.DeleteItem'}}"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </div>
+                        {{/if}}
+                    {{/each}}
+                </div>
+                <div class="item-create" data-type="poder">
+                    <button type="button" class="item-create-button">
+                        <i class="fas fa-plus"></i> {{localize "CDS.CreatePoder"}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+

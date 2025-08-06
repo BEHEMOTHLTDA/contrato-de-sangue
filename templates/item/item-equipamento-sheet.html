@@ -1,0 +1,65 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
+        <div class="header-fields">
+            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Nome do Equipamento"/></h1>
+            <div class="resource">
+                <label class="resource-label">{{localize "CDS.Quantidade"}}</label>
+                <span class="resource-value">{{system.quantidade}}</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{localize "CDS.Descricao"}}</a>
+        <a class="item" data-tab="details">Detalhes</a>
+    </nav>
+
+    <section class="tab-content">
+        <!-- Aba Descrição -->
+        <div class="tab active" data-tab="description">
+            <div class="form-group">
+                <label>{{localize "CDS.Descricao"}}</label>
+                {{editor system.description target="system.description" button=true owner=owner editable=editable}}
+            </div>
+        </div>
+
+        <!-- Aba Detalhes -->
+        <div class="tab" data-tab="details">
+            <div class="form-group">
+                <label>{{localize "CDS.Quantidade"}}</label>
+                <input type="number" name="system.quantidade" value="{{system.quantidade}}" min="1" data-dtype="Number"/>
+            </div>
+
+            <div class="form-group-grid">
+                <div class="form-group">
+                    <label>{{localize "CDS.Peso"}} (kg por unidade)</label>
+                    <input type="number" name="system.peso" value="{{system.peso}}" step="0.1" data-dtype="Number"/>
+                </div>
+
+                <div class="form-group">
+                    <label>{{localize "CDS.Preco"}} ($ por unidade)</label>
+                    <input type="number" name="system.preco" value="{{system.preco}}" data-dtype="Number"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Equipamento em Uso</label>
+                <input type="checkbox" name="system.equipado" {{checked system.equipado}} data-dtype="Boolean"/>
+            </div>
+
+            <div class="form-group">
+                <button type="button" class="test-item">
+                    <i class="fas fa-info-circle"></i> Mostrar Informações
+                </button>
+            </div>
+
+            <div class="equipment-info">
+                <h4>Informações do Equipamento</h4>
+                <p><strong>Peso Total:</strong> {{multiply system.peso system.quantidade}} kg</p>
+                <p><strong>Valor Total:</strong> ${{multiply system.preco system.quantidade}}</p>
+            </div>
+        </div>
+    </section>
+</form>
+

@@ -1,0 +1,474 @@
+/* Importa fontes pixeladas */
+@import url('https://fonts.googleapis.com/css2?family=VT323:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+/* Reset e configurações globais */
+.contrato-de-sangue * {
+  box-sizing: border-box;
+}
+
+/* Configurações principais da ficha */
+.contrato-de-sangue .window-content {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  color: #e0e0e0;
+  font-family: 'VT323', monospace;
+  font-size: 18px;
+  border: 3px solid #666;
+  border-image: linear-gradient(45deg, #8b0000, #4a0000, #8b0000) 1;
+}
+
+/* Container principal da ficha */
+.contrato-de-sangue .sheet-container {
+  display: grid;
+  grid-template-columns: 300px 1fr 280px;
+  gap: 15px;
+  padding: 15px;
+  min-height: 600px;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(139, 0, 0, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(74, 0, 0, 0.1) 0%, transparent 50%);
+}
+
+/* Painéis laterais e central */
+.contrato-de-sangue .left-pane,
+.contrato-de-sangue .center-pane,
+.contrato-de-sangue .right-pane {
+  background: rgba(42, 42, 42, 0.9);
+  border: 2px solid #555;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 
+    inset 0 0 10px rgba(139, 0, 0, 0.2),
+    0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Nome do personagem */
+.contrato-de-sangue .char-name-container {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.contrato-de-sangue .char-name-container input {
+  width: 100%;
+  font-family: 'Orbitron', monospace;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  background: linear-gradient(135deg, #333 0%, #1a1a1a 100%);
+  border: 2px solid #8b0000;
+  border-radius: 4px;
+  color: #e0e0e0;
+  padding: 8px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.contrato-de-sangue .char-name-container input:focus {
+  outline: none;
+  border-color: #ff4500;
+  box-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
+}
+
+/* Títulos de seção */
+.contrato-de-sangue h3 {
+  font-family: 'Orbitron', monospace;
+  font-size: 20px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #8b0000;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+  color: #ff6b6b;
+  text-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
+}
+
+/* Estatísticas principais */
+.contrato-de-sangue .header-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.contrato-de-sangue .stat-box {
+  background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+  border: 1px solid #666;
+  border-radius: 4px;
+  padding: 8px;
+  text-align: center;
+  position: relative;
+}
+
+.contrato-de-sangue .stat-box label {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  color: #ccc;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.contrato-de-sangue .stat-box input {
+  width: 60px;
+  height: 40px;
+  background: #1a1a1a;
+  border: 2px solid #555;
+  border-radius: 4px;
+  color: #e0e0e0;
+  font-family: 'Orbitron', monospace;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.contrato-de-sangue .stat-box input:focus {
+  outline: none;
+  border-color: #ff4500;
+  box-shadow: 0 0 8px rgba(255, 69, 0, 0.3);
+}
+
+/* Balança da Alma - Indicador visual */
+.contrato-de-sangue .balanca-alma {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 15px 0;
+  padding: 10px;
+  background: linear-gradient(90deg, #8b0000 0%, #4a0000 50%, #8b0000 100%);
+  border-radius: 20px;
+  position: relative;
+}
+
+.contrato-de-sangue .balanca-alma::before {
+  content: "⚖️";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  z-index: 2;
+}
+
+/* Perícias */
+.contrato-de-sangue .pericias-container {
+  margin-top: 20px;
+}
+
+.contrato-de-sangue .pericias-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3px;
+}
+
+.contrato-de-sangue .pericia-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px;
+  background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+  border: 1px solid #444;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.contrato-de-sangue .pericia-item:hover {
+  border-color: #ff4500;
+  background: linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 100%);
+  box-shadow: 0 0 8px rgba(255, 69, 0, 0.3);
+}
+
+.contrato-de-sangue .pericia-item.rollable {
+  position: relative;
+}
+
+.contrato-de-sangue .pericia-item.rollable::after {
+  content: "🎲";
+  position: absolute;
+  right: 35px;
+  opacity: 0.6;
+  font-size: 14px;
+}
+
+.contrato-de-sangue .pericia-item label {
+  font-size: 16px;
+  color: #e0e0e0;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+.contrato-de-sangue .pericia-item input {
+  width: 50px;
+  height: 30px;
+  background: #1a1a1a;
+  border: 1px solid #555;
+  border-radius: 3px;
+  color: #e0e0e0;
+  font-family: 'Orbitron', monospace;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Seções de perícias por categoria */
+.contrato-de-sangue .pericias-categoria {
+  margin-bottom: 20px;
+}
+
+.contrato-de-sangue .pericias-categoria h4 {
+  font-family: 'Orbitron', monospace;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ff6b6b;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #555;
+  padding-bottom: 3px;
+}
+
+/* Arte do personagem */
+.contrato-de-sangue .char-art {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.contrato-de-sangue .char-art img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border: 3px solid #666;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.contrato-de-sangue .char-art img:hover {
+  border-color: #ff4500;
+  box-shadow: 0 0 20px rgba(255, 69, 0, 0.5);
+}
+
+/* Sistema de abas */
+.contrato-de-sangue .tabs {
+  display: flex;
+  border-bottom: 2px solid #555;
+  margin-bottom: 15px;
+}
+
+.contrato-de-sangue .tabs .item {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  background: #2a2a2a;
+  border: 1px solid #555;
+  border-bottom: none;
+  cursor: pointer;
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #ccc;
+  transition: all 0.2s ease;
+}
+
+.contrato-de-sangue .tabs .item:first-child {
+  border-top-left-radius: 6px;
+}
+
+.contrato-de-sangue .tabs .item:last-child {
+  border-top-right-radius: 6px;
+}
+
+.contrato-de-sangue .tabs .item.active {
+  background: linear-gradient(135deg, #8b0000 0%, #4a0000 100%);
+  color: #e0e0e0;
+  border-color: #8b0000;
+}
+
+.contrato-de-sangue .tabs .item:hover:not(.active) {
+  background: #3a3a3a;
+  color: #ff6b6b;
+}
+
+/* Conteúdo das abas */
+.contrato-de-sangue .tab-content {
+  min-height: 200px;
+}
+
+.contrato-de-sangue .tab {
+  display: none;
+}
+
+.contrato-de-sangue .tab.active {
+  display: block;
+}
+
+/* Botões */
+.contrato-de-sangue button,
+.contrato-de-sangue .button {
+  background: linear-gradient(135deg, #8b0000 0%, #4a0000 100%);
+  border: 2px solid #666;
+  border-radius: 4px;
+  color: #e0e0e0;
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  padding: 8px 16px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+.contrato-de-sangue button:hover,
+.contrato-de-sangue .button:hover {
+  background: linear-gradient(135deg, #a00000 0%, #600000 100%);
+  border-color: #ff4500;
+  box-shadow: 0 0 10px rgba(255, 69, 0, 0.3);
+}
+
+/* Dados de Reserva */
+.contrato-de-sangue .reserva-dados {
+  background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+  border: 2px solid #666;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 15px 0;
+  text-align: center;
+}
+
+.contrato-de-sangue .reserva-dados h4 {
+  font-family: 'Orbitron', monospace;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ff6b6b;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.contrato-de-sangue .dados-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.contrato-de-sangue .dado-sagrado {
+  background: linear-gradient(135deg, #4a90e2 0%, #2171b5 100%);
+}
+
+.contrato-de-sangue .dado-umbral {
+  background: linear-gradient(135deg, #8b0000 0%, #4a0000 100%);
+}
+
+/* Listas de itens */
+.contrato-de-sangue .item-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contrato-de-sangue .item-list .item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+  border: 1px solid #444;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.contrato-de-sangue .item-list .item:hover {
+  border-color: #ff4500;
+  background: linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 100%);
+}
+
+.contrato-de-sangue .item-list .item .item-name {
+  font-weight: bold;
+  color: #e0e0e0;
+}
+
+.contrato-de-sangue .item-list .item .item-controls {
+  display: flex;
+  gap: 5px;
+}
+
+.contrato-de-sangue .item-list .item .item-controls a {
+  color: #ccc;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.contrato-de-sangue .item-list .item .item-controls a:hover {
+  color: #ff4500;
+}
+
+/* Campos de texto e textarea */
+.contrato-de-sangue input[type="text"],
+.contrato-de-sangue input[type="number"],
+.contrato-de-sangue textarea,
+.contrato-de-sangue select {
+  background: #1a1a1a;
+  border: 1px solid #555;
+  border-radius: 4px;
+  color: #e0e0e0;
+  font-family: 'VT323', monospace;
+  font-size: 16px;
+  padding: 6px;
+}
+
+.contrato-de-sangue input[type="text"]:focus,
+.contrato-de-sangue input[type="number"]:focus,
+.contrato-de-sangue textarea:focus,
+.contrato-de-sangue select:focus {
+  outline: none;
+  border-color: #ff4500;
+  box-shadow: 0 0 8px rgba(255, 69, 0, 0.3);
+}
+
+/* Scrollbar personalizada */
+.contrato-de-sangue ::-webkit-scrollbar {
+  width: 8px;
+}
+
+.contrato-de-sangue ::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border-radius: 4px;
+}
+
+.contrato-de-sangue ::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #8b0000 0%, #4a0000 100%);
+  border-radius: 4px;
+}
+
+.contrato-de-sangue ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #a00000 0%, #600000 100%);
+}
+
+/* Responsividade */
+@media (max-width: 1200px) {
+  .contrato-de-sangue .sheet-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+  
+  .contrato-de-sangue .left-pane,
+  .contrato-de-sangue .center-pane,
+  .contrato-de-sangue .right-pane {
+    width: 100%;
+  }
+}
+
+/* Animações */
+@keyframes pulse {
+  0% { box-shadow: 0 0 5px rgba(255, 69, 0, 0.3); }
+  50% { box-shadow: 0 0 15px rgba(255, 69, 0, 0.6); }
+  100% { box-shadow: 0 0 5px rgba(255, 69, 0, 0.3); }
+}
+
+.contrato-de-sangue .pulse {
+  animation: pulse 2s infinite;
+}
+

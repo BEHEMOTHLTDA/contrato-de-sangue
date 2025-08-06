@@ -1,0 +1,54 @@
+{
+  "id": "contrato-de-sangue",
+  "title": "Contrato de Sangue",
+  "description": "Sistema completo de RPG de Horror Gótico-Punk para Foundry VTT. Explore os conflitos internos de personagens divididos entre sua humanidade e sua natureza bestial. Inclui automação completa das regras, fichas de personagem estilizadas, sistema de dados de reserva, poderes das linhagens Upiór e Wilkołaki, e muito mais.",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "Manus AI",
+      "email": "contato@manus.ai",
+      "url": "https://manus.ai"
+    }
+  ],
+  "compatibility": {
+    "minimum": "11",
+    "verified": "12",
+    "maximum": "12"
+  },
+    "styles": [
+    "styles/system.css",
+    "styles/interface.css"
+  ],
+  "scripts": [
+    "scripts/system.js",
+    "scripts/ui-enhancements.js",
+    "scripts/create-compendiums.js",
+    "scripts/combat-automation.js",
+    "scripts/investigation-system.js",
+    "scripts/macros.js"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
+      "lang": "pt-BR",
+      "name": "Português (Brasil)",
+      "path": "lang/pt-BR.json"
+    }
+  ],
+  "packs": [],
+  "gridDistance": 1.5,
+  "gridUnits": "m",
+  "primaryTokenAttribute": "humanidade",
+  "secondaryTokenAttribute": "bestialidade",
+  "url": "https://github.com/manus-ai/contrato-de-sangue-foundry",
+  "manifest": "https://github.com/manus-ai/contrato-de-sangue-foundry/releases/latest/download/module.json",
+  "download": "https://github.com/manus-ai/contrato-de-sangue-foundry/releases/download/1.0.0/contrato-de-sangue.zip",
+  "license": "LICENSE.txt",
+  "readme": "README.md",
+  "changelog": "CHANGELOG.md"
+}
+

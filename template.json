@@ -1,0 +1,131 @@
+{
+  "Actor": {
+    "types": ["personagem"],
+    "personagem": {
+      "biografia": "",
+      "conceito": "",
+      "linhagem": "upior",
+      "afinidade": "brutalista",
+      "idade": "",
+      "aparencia": "",
+      "contatos": "",
+      "humanidade": {
+        "value": 6,
+        "min": 0,
+        "max": 12
+      },
+      "bestialidade": {
+        "value": 6,
+        "min": 0,
+        "max": 12
+      },
+      "mortalidade": {
+        "value": 0,
+        "min": 0,
+        "max": 20
+      },
+      "reservaDados": {
+        "value": 7,
+        "max": 7
+      },
+      "pontosEntendimento": {
+        "value": 0,
+        "max": 20
+      },
+      "pericias": {
+        "atletismo": 0,
+        "briga": 0,
+        "conducao": 0,
+        "furtividade": 0,
+        "sobrevivencia": 0,
+        "computadores": 0,
+        "investigacao": 0,
+        "medicina": 0,
+        "ocultismo": 0,
+        "ciencias": 0,
+        "empatia": 0,
+        "expressao": 0,
+        "intimidacao": 0,
+        "persuasao": 0,
+        "subterfugio": 0,
+        "armasBrancas": 0,
+        "armasDeFogo": 0,
+        "defesa": 0
+      },
+      "health": {
+        "value": 10,
+        "max": 10,
+        "temp": 0,
+        "tempmax": 0,
+        "conditions": {
+          "escoriado": false,
+          "machucado": false,
+          "ferido": false,
+          "feridoGravemente": false,
+          "aleijado": false,
+          "incapacitado": false
+        }
+      },
+      "experiencia": {
+        "total": 0,
+        "gasta": 0,
+        "disponivel": 0
+      },
+      "cacaFrequencia": {
+        "necessaria": false,
+        "frequencia": "nenhuma"
+      }
+    }
+  },
+  "Item": {
+    "types": ["vantagem", "equipamento", "arma", "armadura", "poder"],
+    "vantagem": {
+      "description": "",
+      "linhagem": "ambas",
+      "bonus": {
+        "tipo": "pericia",
+        "valor": 0,
+        "aplicacao": ""
+      },
+      "ativa": true
+    },
+    "equipamento": {
+      "description": "",
+      "peso": 0,
+      "preco": 0,
+      "quantidade": 1,
+      "equipado": false
+    },
+    "arma": {
+      "description": "",
+      "dano": 0,
+      "alcance": "curto",
+      "especial": "",
+      "tipo": "branca",
+      "peso": 0,
+      "preco": 0,
+      "equipada": false
+    },
+    "armadura": {
+      "description": "",
+      "absorcao": 0,
+      "penalidade": 0,
+      "peso": 0,
+      "preco": 0,
+      "equipada": false
+    },
+    "poder": {
+      "description": "",
+      "linhagem": "upior",
+      "custo": {
+        "reservaDados": 0,
+        "mortalidade": 0,
+        "pontosEntendimento": 0
+      },
+      "efeito": "",
+      "duracao": "",
+      "alcance": ""
+    }
+  }
+}
+

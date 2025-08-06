@@ -1,0 +1,78 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
+        <div class="header-fields">
+            <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Nome da Arma"/></h1>
+            <div class="resource">
+                <label class="resource-label">{{localize "CDS.TipoDano"}}</label>
+                <select name="system.tipo" data-dtype="String">
+                    <option value="branca" {{#if (eq system.tipo "branca")}}selected{{/if}}>Arma Branca</option>
+                    <option value="fogo" {{#if (eq system.tipo "fogo")}}selected{{/if}}>Arma de Fogo</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <nav class="tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{localize "CDS.Descricao"}}</a>
+        <a class="item" data-tab="details">Detalhes</a>
+    </nav>
+
+    <section class="tab-content">
+        <!-- Aba Descrição -->
+        <div class="tab active" data-tab="description">
+            <div class="form-group">
+                <label>{{localize "CDS.Descricao"}}</label>
+                {{editor system.description target="system.description" button=true owner=owner editable=editable}}
+            </div>
+        </div>
+
+        <!-- Aba Detalhes -->
+        <div class="tab" data-tab="details">
+            <div class="form-group-grid">
+                <div class="form-group">
+                    <label>{{localize "CDS.Dano"}}</label>
+                    <input type="number" name="system.dano" value="{{system.dano}}" data-dtype="Number"/>
+                </div>
+
+                <div class="form-group">
+                    <label>{{localize "CDS.Alcance"}}</label>
+                    <select name="system.alcance" data-dtype="String">
+                        <option value="curto" {{#if (eq system.alcance "curto")}}selected{{/if}}>{{localize "CDS.AlcanceCurto"}}</option>
+                        <option value="medio" {{#if (eq system.alcance "medio")}}selected{{/if}}>{{localize "CDS.AlcanceMedio"}}</option>
+                        <option value="longo" {{#if (eq system.alcance "longo")}}selected{{/if}}>{{localize "CDS.AlcanceLongo"}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>{{localize "CDS.Especial"}}</label>
+                <input type="text" name="system.especial" value="{{system.especial}}" placeholder="Propriedades especiais" data-dtype="String"/>
+            </div>
+
+            <div class="form-group-grid">
+                <div class="form-group">
+                    <label>{{localize "CDS.Peso"}} (kg)</label>
+                    <input type="number" name="system.peso" value="{{system.peso}}" step="0.1" data-dtype="Number"/>
+                </div>
+
+                <div class="form-group">
+                    <label>{{localize "CDS.Preco"}} ($)</label>
+                    <input type="number" name="system.preco" value="{{system.preco}}" data-dtype="Number"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Arma Equipada</label>
+                <input type="checkbox" name="system.equipada" {{checked system.equipada}} data-dtype="Boolean"/>
+            </div>
+
+            <div class="form-group">
+                <button type="button" class="test-item">
+                    <i class="fas fa-sword"></i> Atacar com esta Arma
+                </button>
+            </div>
+        </div>
+    </section>
+</form>
+
